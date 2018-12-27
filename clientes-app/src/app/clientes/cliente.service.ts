@@ -6,6 +6,7 @@ import { throwError, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Region } from './region';
+import { AuthService } from '../usuarios/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,15 @@ export class ClienteService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
+
+  private addAuthorizationHeader(){
+    let token = this.authService.token;
+    if(token != null){
+      return this.httpHeaders.append('Authorization', 'Bearer ' + token);
+    }
+    return this.httpHeaders;
+  }
 
   getListadoDeClientes(): Observable<Cliente[]> {
     return of(LISTADO_DE_CLIENTES);
@@ -31,7 +40,18 @@ export class ClienteService {
   }
 
   getRegiones(): Observable<Region[]>{
-    return this.http.get<Region[]>(this.urlEndPoint + '/regiones').pipe(
+    return this.http.get<Region[]>(this.urlEndPoint + '/regiones', {headers: this.addAuthorizationHeader()}).pipe(
+      catchError(
+        e => {
+          this.isNoAuthorized(e);
+          return throwError(e);
+        }
+      )
+    );
+  }
+
+  getClientes(): Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(this.urlEndPoint).pipe(
       catchError(
         e => {
           this.isNoAuthorized(e);
