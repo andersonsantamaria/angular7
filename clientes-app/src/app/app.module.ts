@@ -7,11 +7,16 @@ import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './usuarios/login.component';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
   { path: 'directivas', component: DirectivaComponent },
-  { path: 'clientes', component: ClientesComponent }
+  { path: 'clientes', component: ClientesComponent },
+  { path: 'login', component: LoginComponent }
 ]
 
 @NgModule({
@@ -20,11 +25,20 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     DirectivaComponent,
-    ClientesComponent
+    ClientesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      customClass: 'modal-content',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn'
+    }),
+     FormsModule,
+     HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
