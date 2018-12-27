@@ -80,7 +80,7 @@ export class AuthService {
 
   isAuthenticated(): boolean{
     let payload = this.getDataToken(this.token);
-    if(payload =! null && payload.user_name && payload.user_name.length > 0){
+    if(payload != null && payload.user_name != null && payload.user_name.length > 0){
       return true;
     }
     return false;
