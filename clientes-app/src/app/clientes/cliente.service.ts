@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Region } from './region';
 import { AuthService } from '../usuarios/auth.service';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,9 @@ export class ClienteService {
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
-  private addAuthorizationHeader(){
+  private addAuthorizationHeader() {
     let token = this.authService.token;
-    if(token != null){
+    if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);
     }
     return this.httpHeaders;
@@ -32,15 +33,25 @@ export class ClienteService {
   }
 
   private isNoAuthorized(e): boolean {
-    if (e.status == 401 || e.status == 403) {
+    if (e.status == 401) {
+      if (this.authService.isAuthenticated()) {
+        this.authService.logout();
+      }
       this.router.navigate(['/login'])
       return true;
     }
+
+    if (e.status == 403) {
+      swal('Acceso denegado', `Hola ${this.authService.user.username} no tienes acceso a este recurso!`, 'warning');
+      this.router.navigate(['/clientes'])
+      return true;
+    }
+
     return false;
   }
 
-  getRegiones(): Observable<Region[]>{
-    return this.http.get<Region[]>(this.urlEndPoint + '/regiones', {headers: this.addAuthorizationHeader()}).pipe(
+  getRegiones(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.urlEndPoint + '/regiones', { headers: this.addAuthorizationHeader() }).pipe(
       catchError(
         e => {
           this.isNoAuthorized(e);
@@ -50,7 +61,7 @@ export class ClienteService {
     );
   }
 
-  getClientes(): Observable<Cliente[]>{
+  getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.urlEndPoint).pipe(
       catchError(
         e => {

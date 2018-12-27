@@ -13,23 +13,23 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public get user(): Usuario{
-    if(this._user != null){
+  public get user(): Usuario {
+    if (this._user != null) {
       return this._user;
     }
-    else if(this._user == null && sessionStorage.getItem('user') != null){
-      this._user =  JSON.parse(sessionStorage.getItem('user')) as Usuario;
+    else if (this._user == null && sessionStorage.getItem('user') != null) {
+      this._user = JSON.parse(sessionStorage.getItem('user')) as Usuario;
       return this._user;
     }
     return new Usuario();
   }
 
-  public get token(): string{
-    if(this._token != null){
+  public get token(): string {
+    if (this._token != null) {
       return this._token;
     }
-    else if(this._token == null && sessionStorage.getItem('token') != null){
-      this._token =  sessionStorage.getItem('token');
+    else if (this._token == null && sessionStorage.getItem('token') != null) {
+      this._token = sessionStorage.getItem('token');
       return this._token;
     }
     return null;
@@ -78,19 +78,23 @@ export class AuthService {
     }
   }
 
-  isAuthenticated(): boolean{
+  isAuthenticated(): boolean {
     let payload = this.getDataToken(this.token);
-    if(payload != null && payload.user_name != null && payload.user_name.length > 0){
+    if (payload != null && payload.user_name != null && payload.user_name.length > 0) {
       return true;
     }
     return false;
   }
 
-  logout(): void{
+  logout(): void {
     this._token = null;
     this._user = null;
     // sirve para limpiar todo el sessionStorage sessionStorage.clear();
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
+  }
+
+  hasRole(role: string): boolean {
+    return this.user.roles.includes(role);
   }
 }
