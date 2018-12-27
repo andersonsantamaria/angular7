@@ -11,11 +11,13 @@ import { LoginComponent } from './usuarios/login.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './usuarios/guards/auth.guard';
+import { RoleGuard } from './usuarios/guards/role.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
-  { path: 'directivas', component: DirectivaComponent },
-  { path: 'clientes', component: ClientesComponent },
+  { path: 'directivas', component: DirectivaComponent, canActivate: [AuthGuard] },
+  { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'} },
   { path: 'login', component: LoginComponent }
 ]
 
