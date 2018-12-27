@@ -1,2 +1,2 @@
-# spring5_angular7
+# angular7
 Proyecto de Udemy
