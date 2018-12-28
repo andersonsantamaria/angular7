@@ -16,7 +16,7 @@ export class RoleGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isAuthenticated()) {
+    if (!this.authService.isAuthenticated() || this.isTokenExpired()) {
       this.router.navigate(['/login']);
       return false;
     }
@@ -26,7 +26,18 @@ export class RoleGuard implements CanActivate {
       return true;
     }
     swal('Acceso denegado', `Hola ${this.authService.user.username} no tienes acceso a este recurso!`, 'warning');
-    this.router.navigate(['/clientes']);
+    this.router.navigate(['/directivas']);
+    return false;
+  }
+
+  isTokenExpired(): boolean {
+    let token = this.authService.token;
+    let payload = this.authService.getDataToken(token);
+    let now = new Date().getTime() / 1000;
+
+    if (payload.exp < now) {
+      return true;
+    }
     return false;
   }
 }
