@@ -1,18 +1,22 @@
-<div class="card border-primary text-center col-md-6" style="margin-top: 30px; margin-left: 25%;">
-  <div class="card-header">{{titulo}}</div>
-  <div class="card-body">
-    <form method="post">
-      <div class="form-group col-sm-12">
-        <input [(ngModel)]="usuario.username" type="text" class="form-control" name="username" id="username" placeholder="Username" autofocus required>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="card border-primary text-center offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 martopto15">
+      <div class="card-header">{{titulo}}</div>
+      <div class="card-body">
+        <form method="post">
+          <div class="form-group col-sm-12">
+            <input [(ngModel)]="usuario.username" type="text" class="form-control" name="username" id="username" placeholder="Username" autofocus required>
+          </div>
 
-      <div class="form-group col-sm-12">
-        <input [(ngModel)]="usuario.password" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-      </div>
+          <div class="form-group col-sm-12">
+            <input [(ngModel)]="usuario.password" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+          </div>
 
-      <div class="form-group col-sm-12">
-        <input (click)='login()' type="submit" class="btn btn-lg btn-primary btn-block" value="Login">
+          <div class="form-group offset-md-3 col-md-6 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6">
+            <input (click)='login()' type="submit" class="btn btn-lg btn-primary btn-block" value="Login">
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </div>

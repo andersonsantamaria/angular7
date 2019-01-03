@@ -4,7 +4,8 @@ import { ClienteService } from '../clientes/cliente.service';
 
 @Component({
   selector: 'app-directiva',
-  templateUrl: './directiva.component.html'
+  templateUrl: './directiva.component.html',
+  styleUrls: ['./directiva.component.css']
 })
 export class DirectivaComponent implements OnInit {
   listadoRegiones: Region[];

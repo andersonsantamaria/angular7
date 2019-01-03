@@ -1,30 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">{{title}}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="row">
+    <div class="col-sm-9">
+      <a class="navbar-brand" href="#">{{title}}</a>
+    </div>
+    <div class="col-sm-3">
+      <button *ngIf="authService.isAuthenticated()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/directivas">Regiones</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/clientes">Clientes</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav navbar-right">
-      <li><a *ngIf="!authService.isAuthenticated()" routerLink="/login" class="btn btn-outline-primary">Sign in</a></li>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto col-sm-8">
+            <li class="nav-item" routerLinkActive="active">
+              <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/directivas">Regiones</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/clientes">Clientes</a>
+            </li>
+          </ul>
 
-      <li class="dropdown" *ngIf="authService.isAuthenticated()">
-        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{authService.user.username}}
-        </a>
+        <div class="col-sm-4">
+          <ul class="navbar-nav navbar-right">
+            <li class="dropdown pull-right" *ngIf="authService.isAuthenticated()">
+              <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{authService.user.username}}
+              </a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <button (click)="logout()" class="dropdown-item" type="submit">Sign Out</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <button (click)="logout()" class="dropdown-item" type="submit">Sign Out</button>
+              </div>
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </nav>
