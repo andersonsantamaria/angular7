@@ -14,14 +14,14 @@ import swal from 'sweetalert2';
 })
 export class ClienteService {
 
-  private urlEndPoint: string = 'http://localhost:8081/api/clientes';
+  private urlEndPoint = 'http://localhost:8081/api/clientes';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
   private addAuthorizationHeader() {
-    let token = this.authService.token;
+    const token = this.authService.token;
     if (token != null) {
       return this.httpHeaders.append('Authorization', 'Bearer ' + token);
     }
@@ -33,17 +33,17 @@ export class ClienteService {
   }
 
   private isNoAuthorized(e): boolean {
-    if (e.status == 401) {
+    if (e.status === 401) {
       if (this.authService.isAuthenticated()) {
         this.authService.logout();
       }
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
       return true;
     }
 
-    if (e.status == 403) {
+    if (e.status === 403) {
       swal('Acceso denegado', `Hola ${this.authService.user.username} no tienes acceso a este recurso!`, 'warning');
-      this.router.navigate(['/clientes'])
+      this.router.navigate(['/clientes']);
       return true;
     }
 

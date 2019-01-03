@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import { HttpHandler, HttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,6 +14,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent, HeaderComponent, FooterComponent
       ],
+      providers: [HttpClient, HttpHandler
+      ]
     }).compileComponents();
   }));
 

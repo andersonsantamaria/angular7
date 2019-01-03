@@ -16,8 +16,7 @@ export class AuthService {
   public get user(): Usuario {
     if (this._user != null) {
       return this._user;
-    }
-    else if (this._user == null && sessionStorage.getItem('user') != null) {
+    } else if (this._user == null && sessionStorage.getItem('user') != null) {
       this._user = JSON.parse(sessionStorage.getItem('user')) as Usuario;
       return this._user;
     }
@@ -27,8 +26,7 @@ export class AuthService {
   public get token(): string {
     if (this._token != null) {
       return this._token;
-    }
-    else if (this._token == null && sessionStorage.getItem('token') != null) {
+    } else if (this._token == null && sessionStorage.getItem('token') != null) {
       this._token = sessionStorage.getItem('token');
       return this._token;
     }
@@ -54,7 +52,7 @@ export class AuthService {
   }
 
   saveUser(access_token: string): void {
-    let payload = this.getDataToken(access_token);
+    const payload = this.getDataToken(access_token);
     this._user = new Usuario();
     this._user.nombre = payload.nombre;
     this._user.apellido = payload.apellido;
@@ -71,15 +69,14 @@ export class AuthService {
 
   getDataToken(access_token: string): any {
     if (access_token != null) {
-      return JSON.parse(atob(access_token.split(".")[1]));
-    }
-    else {
+      return JSON.parse(atob(access_token.split('.')[1]));
+    } else {
       return null;
     }
   }
 
   isAuthenticated(): boolean {
-    let payload = this.getDataToken(this.token);
+    const payload = this.getDataToken(this.token);
     if (payload != null && payload.user_name != null && payload.user_name.length > 0) {
       return true;
     }
