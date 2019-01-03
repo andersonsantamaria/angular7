@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  titulo: string = "Por favor Sign In!";
+  titulo: string = "Por favor inicia sesión!";
   usuario: Usuario;
 
   constructor(private authService: AuthService, private router: Router) {
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         if (error.status == 400) {
-          swal('Login', 'Usuario o clave incorrecta!', 'error');
+          swal('Login', 'Username o Password incorrecto!', 'error');
         }
       }
     );
