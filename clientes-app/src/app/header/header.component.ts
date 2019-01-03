@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 
 })
 export class HeaderComponent {
-  title: string = 'App Angular';
+  title = 'App Angular';
 
   constructor(private authService: AuthService, private router: Router) { }
 

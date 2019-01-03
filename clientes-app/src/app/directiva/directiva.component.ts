@@ -9,7 +9,7 @@ import { ClienteService } from '../clientes/cliente.service';
 })
 export class DirectivaComponent implements OnInit {
   listadoRegiones: Region[];
-  habilitarLista: boolean = true;
+  habilitarLista = true;
 
   constructor(private clienteService: ClienteService) { }
 

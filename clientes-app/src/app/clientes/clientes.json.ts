@@ -1,4 +1,4 @@
-﻿import { Cliente } from './cliente'
+﻿import { Cliente } from './cliente';
 
 export const LISTADO_DE_CLIENTES: Cliente[] = [
   { id: 1, nombre: 'Anderson', apellido: 'Santamaria', createAt: '2018/12/06', email: 'andersonsantamaria@gmail.com' },

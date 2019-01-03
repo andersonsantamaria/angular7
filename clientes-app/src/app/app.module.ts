@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'directivas', component: DirectivaComponent, canActivate: [AuthGuard] },
   { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'} },
   { path: 'login', component: LoginComponent }
-]
+];
 
 @NgModule({
   declarations: [
