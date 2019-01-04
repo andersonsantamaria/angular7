@@ -24,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule,    
+    BrowserModule,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
       customClass: 'modal-content',
@@ -32,8 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
       cancelButtonClass: 'btn'
     }),
      FormsModule,
-     HttpClientModule,
-     AppRoutingModule
+     HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

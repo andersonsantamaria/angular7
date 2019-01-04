@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Region } from './region';
 import { AuthService } from '../usuarios/auth.service';
+import { environment } from '../../environments/environment';
 import swal from 'sweetalert2';
 
 @Injectable({
@@ -14,7 +15,7 @@ import swal from 'sweetalert2';
 })
 export class ClienteService {
 
-  private urlEndPoint = 'http://localhost:8081/api/clientes';
+  private urlEndPoint = environment.host.concat('/api/clientes');
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 

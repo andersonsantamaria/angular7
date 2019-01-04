@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from './usuario';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndPoint = 'http://localhost:8081/oauth/token';
+    const urlEndPoint = environment.host.concat('/oauth/token');
 
     const params = new URLSearchParams();
     params.set('grant_type', 'password');
