@@ -15,7 +15,7 @@ export class HeaderComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   logout(): void {
-    swal('Logout', `Hola ${this.authService.user.username}, has cerrado sesión con éxito`, 'success');
+    swal('Cierre de sesión', `Hola ${this.authService.user.username}, has cerrado sesión con éxito`, 'success');
     this.authService.logout();
     this.router.navigate(['/login']);
   }

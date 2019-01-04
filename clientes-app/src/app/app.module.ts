@@ -32,7 +32,8 @@ import { AppRoutingModule } from './app-routing.module';
       cancelButtonClass: 'btn'
     }),
      FormsModule,
-     HttpClientModule
+     HttpClientModule,
+     AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
